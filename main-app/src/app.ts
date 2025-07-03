@@ -1,5 +1,5 @@
 // src/app.ts
-import { request } from 'umi';
+import { request, RunTimeLayoutConfig } from 'umi';
 import { useModel } from 'umi';
 
 export async function getInitialState(): Promise<{ name: string; accountName: string; accountAge: number }> {
@@ -25,7 +25,8 @@ export async function getInitialState(): Promise<{ name: string; accountName: st
 
 
 
-export const layout = () => {
+export const layout: RunTimeLayoutConfig = ({ initialState }) => {
+  console.log('Initial State:', initialState);
   return {
     logo: 'https://img.alicdn.com/tfs/TB1YHEpwUT1gK0jSZFhXXaAtVXa-28-27.svg',
     menu: {
@@ -34,13 +35,41 @@ export const layout = () => {
     title: false,
     layout: 'mix',
     disableMobile: true,
+    token: {
+      header: {
+        // 修改 Header 背景颜色
+        colorBgHeader: '#001529',
+        // 修改 Header 文字颜色
+        colorTextHeader: '#ffffff',
+        // 修改 Header 分割线颜色
+        colorSplitHeader: '#404040',
+        // 修改 Header 图标颜色
+        colorIconHeader: '#ffffff',
+        // 修改 Header 悬浮背景颜色
+        colorBgHeaderHover: '#1890ff',
+        // 修改 Header 选中背景颜色
+        colorBgHeaderSelected: '#1890ff',
+      },
+      // sider 侧边栏配置 可参考 https://pro-components.antdigital.dev/components/layout#sider-token
+      sider: {
+        colorMenuBackground: '#001529',
+        colorTextMenuTitle: '#ffffff',
+        colorMenuItemDivider: 'transparent',
+        colorTextMenu: '#8a8a8a',
+        colorTextMenuSelected: '#ffffff',
+        colorTextMenuItemHover: '#ffffff',
+        colorTextMenuActive: '#ffffff',
+        colorBgMenuItemSelected: '#1890ff',
+
+      },
+    },
 
   };
 };
 
-export const qiankun = async()=>{
-   const response = await request('https://www.layablog.top/api/get/whatsHot');
-   console.log('API Response:', response);
+export const qiankun = async () => {
+  const response = await request('https://www.layablog.top/api/get/whatsHot');
+  console.log('API Response:', response);
   return {
     master: {
       apps: [
@@ -49,7 +78,7 @@ export const qiankun = async()=>{
           entry: '//localhost:3003',
           props: {
             accountOnClick: (event: any) => console.log(event),
-            accountName: response[0]._id|| 'Default Name', // 动态替换
+            accountName: response[0]._id || 'Default Name', // 动态替换
             accountAge: response[0].title || 0, // 动态替换
           },
         },
@@ -60,7 +89,7 @@ export const qiankun = async()=>{
       ],
     },
   };
-} 
+}
 
 
 
