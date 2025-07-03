@@ -36,6 +36,7 @@ if (!qiankunWindow.__POWERED_BY_QIANKUN__) {
     renderWithQiankun({
         mount(props) {
             getApp().mount(props.container?.querySelector("#app")!);
+            console.log(props,'props in sub-app-vue3')
         },
         bootstrap() {
             console.log("bootstrap");
