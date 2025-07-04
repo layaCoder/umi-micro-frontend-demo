@@ -34,7 +34,13 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     },
     title: false,
     layout: 'mix',
+    splitMenus: true,
     disableMobile: true,
+    //  menuDataRender: (menuData) => {
+    //   console.log('Menu Data:', menuData);
+    //   // 自定义菜单数据处理逻辑
+    //   return menuData;
+    // },
     token: {
       header: {
         // 修改 Header 背景颜色
@@ -89,6 +95,22 @@ export const qiankun = async () => {
       ],
     },
   };
+}
+
+
+// 全局路由监听逻辑
+export function onRouteChange({ location, routes, action }: any) {
+  // 全局路由变化时的回调函数
+  console.log('路由发生变化:', location.pathname);
+  
+  // 示例：权限控制
+  const isLogin = localStorage.getItem('token');
+  if (!isLogin && location.pathname !== '/login') {
+    return {
+      pathname: '/login',
+      search: `?redirect=${location.pathname}`,
+    };
+  }
 }
 
 

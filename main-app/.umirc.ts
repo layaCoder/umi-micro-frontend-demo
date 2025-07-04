@@ -14,12 +14,12 @@ export default defineConfig({
       path: '/',
       redirect: '/app1/page1',
     },
-    {
-      name: '路由绑定子应用Vue3',
-      path: '/app1',
-      // component: './Home',
-      microApp: 'app1',
-    },
+    // {
+    //   name: '路由绑定子应用Vue3',
+    //   path: '/app1',
+    //   // component: './Home',
+    //   microApp: 'app1',
+    // },
     {
       name: '组件加载子应用Vue3',
       // component: './Access',
@@ -37,11 +37,11 @@ export default defineConfig({
         },
       ],
     },
-    {
-      name: '路由绑定子应用umi max',
-      path: '/app2',
-      microApp: 'app2',
-    },
+    // {
+    //   name: '路由绑定子应用umi max',
+    //   path: '/app2',
+    //   microApp: 'app2',
+    // },
     {
       name: '组件加载子应用umi max',
       path: '/app2',
