@@ -6,9 +6,7 @@ export default defineConfig({
   model: {},
   initialState: {},
   request: {},
-  layout: {
-    
-  },
+  layout: {},
   routes: [
     {
       path: '/',
@@ -42,27 +40,27 @@ export default defineConfig({
     //   path: '/app2',
     //   microApp: 'app2',
     // },
-    {
-      name: '组件加载子应用umi max',
-      path: '/app2',
-      routes: [
-        {
-          name: 'Umi Max Page1',
-          path: 'table',
-          component: './Order/orderList',
-        },
-        {
-          name: '子应用嵌套路由',
-          path: 'access/demo',
-          component: './Order/table',
-        },
-      ],
-    },
-    {
-      name: '主应用页面CRUD 示例',
-      path: '/table',
-      component: './Table',
-    },
+    // {
+    //   name: '组件加载子应用umi max',
+    //   path: '/app2',
+    //   routes: [
+    //     {
+    //       name: 'Umi Max Page1',
+    //       path: 'table',
+    //       component: './Order/orderList',
+    //     },
+    //     {
+    //       name: '子应用嵌套路由',
+    //       path: 'access/demo',
+    //       component: './Order/table',
+    //     },
+    //   ],
+    // },
+    // {
+    //   name: '主应用页面CRUD 示例',
+    //   path: '/table',
+    //   component: './Table',
+    // },
   ],
   npmClient: 'yarn',
   qiankun: {
