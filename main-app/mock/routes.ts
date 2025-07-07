@@ -1,32 +1,19 @@
-const routes_2 = [
-  {
-    name: 'api返回路由',
-    path: '/table',
-    component: 'pages/Table',
-    // children: [
-    //   {
-    //     name: 'api返回子应用路由',
-    //     path: '/test',
-    //     component: '.pages/Table',
-    //   },
-    // ],
-  },
-];
+// const routes_2 = [
+//   {
+//     name: 'api返回路由',
+//     path: '/table',
+//     component: 'pages/Table',
+//     // children: [
+//     //   {
+//     //     name: 'api返回子应用路由',
+//     //     path: '/test',
+//     //     component: '.pages/Table',
+//     //   },
+//     // ],
+//   },
+// ];
 
-export default {
-  //
-  'GET /mock/router/getRoutesList': (reg: any, res: any) => {
-    console.log('getRoutesList', reg.query.id);
-    const data = route;
-    res.json({
-      code: 10000,
-      message: '操作成功',
-      data,
-      url: '',
-      operate: 'admin/Admin/login',
-    });
-  },
-};
+import { defineMock } from "@umijs/max";
 
 const route = [
   {
@@ -52,3 +39,20 @@ const route = [
     ],
   },
 ];
+
+
+export default defineMock({
+  //
+  'GET /api/router/getRoutesList': (reg: any, res: any) => {
+    console.log('getRoutesList', reg.query.id);
+    const data = route;
+    res.json({
+      code: 10000,
+      message: '操作成功',
+      data,
+      url: '',
+      operate: 'admin/Admin/login',
+    });
+  },
+})
+

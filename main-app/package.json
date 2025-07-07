@@ -2,8 +2,8 @@
   "private": true,
   "author": "",
   "scripts": {
-    "build": "max build",
-    "dev": "max dev",
+    "build": "cross-env NODE_ENV=production MOCK=none max build",
+    "dev": "cross-env NODE_ENV=development max dev",
     "format": "prettier --cache --write .",
     "postinstall": "max setup",
     "prepare": "husky",
@@ -20,6 +20,7 @@
   "devDependencies": {
     "@types/react": "^18.0.33",
     "@types/react-dom": "^18.0.11",
+    "cross-env": "^7.0.3",
     "husky": "^9",
     "lint-staged": "^13.2.0",
     "prettier": "^2.8.7",

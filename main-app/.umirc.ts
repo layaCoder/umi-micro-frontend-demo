@@ -1,3 +1,4 @@
+import appConfig from './src/appConfig';
 import { defineConfig } from '@umijs/max';
 
 export default defineConfig({
@@ -67,8 +68,17 @@ export default defineConfig({
     //   component: './Table',
     // },
   ],
+  mock: {
+    include: ['./mock/*.ts'],
+  },
   npmClient: 'yarn',
   qiankun: {
     master: {},
+  },
+  proxy: {
+    '/api': {
+      'target': appConfig?.mainApp.baseUrl,
+      'changeOrigin': true,
+    },
   },
 });

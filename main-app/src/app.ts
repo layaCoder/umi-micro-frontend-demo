@@ -2,10 +2,15 @@
 import services from '@/services/demo';
 import * as Icons from '@ant-design/icons';
 import React from 'react';
-import { request, RunTimeLayoutConfig } from 'umi';
+import { request as umiRequest, RunTimeLayoutConfig, RequestConfig } from 'umi';
 import LazyLoadable from './components/LazyLoadable';
+import appConfig from './appConfig';
 
 const { getRoutesList } = services.UserController;
+
+export const request: RequestConfig = {
+  baseURL: process.env.NODE_ENV === 'production' ? appConfig?.mainApp.baseUrl : '', 
+};
 
 export async function getInitialState(): Promise<{
   name: string;
@@ -14,7 +19,7 @@ export async function getInitialState(): Promise<{
 }> {
   try {
     // 模拟调用 API 获取用户信息
-    const response = await request('api url here'); // 替换为实际的 API URL
+    const response = await umiRequest('/api/get/whatsHot'); // 替换为实际的 API URL
     const { name, accountName, accountAge } = response.data;
 
     return {
@@ -81,7 +86,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
 };
 
 export const qiankun = async () => {
-  const response = await request('https://www.layablog.top/api/get/whatsHot');
+  const response = await umiRequest('/api/get/whatsHot');
   console.log('API Response:', response);
   return {
     master: {
