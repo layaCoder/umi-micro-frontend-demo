@@ -12,6 +12,11 @@ export default defineConfig({
       path: '/',
       redirect: '/app1/page1',
     },
+    {
+      path:'/login/*',
+      component: './Login',
+      layout: false,
+    },
     // {
     //   name: '路由绑定子应用Vue3',
     //   path: '/app1',

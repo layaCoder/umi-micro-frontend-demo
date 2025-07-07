@@ -62,6 +62,8 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
         colorBgHeaderHover: '#1890ff',
         // 修改 Header 选中背景颜色
         colorBgHeaderSelected: '#1890ff',
+        colorTextMenu:'#8a8a8a',
+        colorTextMenuSelected:'#ffffff',
       },
       // sider 侧边栏配置 可参考 https://pro-components.antdigital.dev/components/layout#sider-token
       sider: {
