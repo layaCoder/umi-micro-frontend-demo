@@ -8,13 +8,18 @@
     "postinstall": "max setup",
     "prepare": "husky",
     "setup": "max setup",
-    "start": "npm run dev"
+    "start": "npm run dev",
+    "start:dev": "cross-env UMI_ENV=dev max dev",
+    "start:prod": "cross-env UMI_ENV=prod max dev",
+    "build:dev": "cross-env UMI_ENV=dev max build",
+    "build:prod": "cross-env UMI_ENV=prod max build"
   },
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
     "@ant-design/pro-components": "^2.4.4",
     "@umijs/max": "^4.4.11",
     "antd": "^5.4.0",
+    "cross-env": "^7.0.3",
     "crypto-js": "^4.2.0"
   },
   "devDependencies": {

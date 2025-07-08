@@ -5,6 +5,7 @@ import { EyeInvisibleOutlined, EyeOutlined, LockOutlined, UserOutlined } from '@
 import { Input, Button, Form } from 'antd'
 // import { encryptPassword } from '../../const'
 import { useModel, history } from '@umijs/max'
+import { login } from '@/services/user/UserController'
 
 const { Item, useForm } = Form
 
@@ -20,6 +21,14 @@ const Component: FC<ILoginFormProps> = (props) => {
     form.validateFields().then(async ({ username, pwd }) => {
       setLoading(true)
       try {
+        const res = await login({
+          userNo: "0",
+          userName: username,
+          pass: pwd
+        }
+
+        )
+        console.log(res, 'res')
         // const encrypted = encryptPassword(pwd)
 
         // const { data = '' } = await api['/admin/public/login_POST']({ username, password: encrypted })
@@ -27,21 +36,16 @@ const Component: FC<ILoginFormProps> = (props) => {
         // 更新用户信息
 
         // const user = await initialState!.fetchUserInfo!()
-        const user ={
-          name: 'testName'
-        }
+        const user = res.data.User
         await setInitialState((pre) => ({ ...pre, ...user }))
-        /**
-         * FIXME: 这里会出现权限管理账号登陆回跳后账号没有回跳页面权限导致出现403
-         * 需要解决回跳没有权限自动再重定向操作。现阶段没处理。所以默认全部回首页
-         */
-        setTimeout(() => {
-          history.push('/')
-        }, 10)
+      
+        // setTimeout(() => {
+        //   history.push('/')
+        // }, 10)
         // 重定向
         // const { query = {} } = history.location
         // query.redirect ? history.replace(query.redirect as string) : history.push('/home')
-      } catch (error) {}
+      } catch (error) { }
 
       setLoading(false)
     })
@@ -67,7 +71,7 @@ const Component: FC<ILoginFormProps> = (props) => {
           {
             validator: (_, value) =>
               // isChinaMobilePhone(value) ? Promise.resolve() : Promise.reject(new Error('请输入正确的手机号码'))
-            console.log(value) || value ? Promise.resolve() : Promise.reject(new Error('请输入正确的手机号码')),
+              console.log(value) || value ? Promise.resolve() : Promise.reject(new Error('请输入正确的手机号码')),
           }
         ]}
       >

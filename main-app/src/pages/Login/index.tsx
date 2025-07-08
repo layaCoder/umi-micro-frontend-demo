@@ -6,9 +6,11 @@ import LoginForm from './components/loginForm'
 import { useLocation } from '@umijs/max'
 
 const Component: FC = () => {
-  const { state } = useLocation()
-
+  const { state,pathname,search } = useLocation()
+  const businCode = pathname.split('/')[2] || ''
   const [scene, setScene] = useState(state?.scene)
+  localStorage.setItem('businCode', businCode)
+  console.log(process.env,123)
 
   return (
     <div className={styles.component}>

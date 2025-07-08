@@ -2,8 +2,9 @@
 import services from '@/services/demo';
 import * as Icons from '@ant-design/icons';
 import React from 'react';
-import { request, RunTimeLayoutConfig } from 'umi';
+import { request as umiRequest, RequestConfig, RunTimeLayoutConfig } from 'umi';
 import LazyLoadable from './components/LazyLoadable';
+import {config}  from './config'
 
 const { getRoutesList } = services.UserController;
 
@@ -14,7 +15,7 @@ export async function getInitialState(): Promise<{
 }> {
   try {
     // 模拟调用 API 获取用户信息
-    const response = await request('api url here'); // 替换为实际的 API URL
+    const response = await umiRequest('api url here'); // 替换为实际的 API URL
     const { name, accountName, accountAge } = response.data;
 
     return {
@@ -33,7 +34,7 @@ export async function getInitialState(): Promise<{
 }
 
 export const layout: RunTimeLayoutConfig = ({ initialState }) => {
-  console.log('Initial State:', initialState);
+  console.log()
   return {
     logo: 'https://img.alicdn.com/tfs/TB1YHEpwUT1gK0jSZFhXXaAtVXa-28-27.svg',
     menu: {
@@ -81,7 +82,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
 };
 
 export const qiankun = async () => {
-  const response = await request('https://www.layablog.top/api/get/whatsHot');
+  const response = await umiRequest('https://www.layablog.top/api/get/whatsHot');
   console.log('API Response:', response);
   return {
     master: {
@@ -206,3 +207,30 @@ function isEmpty(
       Object.keys(value).length === 0)
   );
 }
+
+
+
+export const request: RequestConfig = {
+  // @ts-ignore
+  
+  // 多环境请求配置
+  // baseURL: config[process.env.UMI_ENV].baseApiUrl,
+
+  // credentials: 'include', //请求携带 cookie
+  requestInterceptors: [
+    // 修改为符合 umi-request 的拦截器格式
+    (url, config) => {
+      const newConfig = { ...config };
+      console.log('Request Interceptor:', url, newConfig);
+      newConfig.headers = {
+        ...newConfig.headers,
+         'BusinCode': localStorage.getItem('businCode') || '',
+        // authorization: `Bearer ${localStorage.getItem('token')}`,
+      };
+      console.log(newConfig, 'newConfig');
+      return { url, options: newConfig }; // 注意：umi-request 使用 `options` 而不是 [config](file://d:\SourceCode\umi-micro-frontend-demo\main-app\src\config\index.js#L0-L10)
+    },
+    // 如果需要错误处理，可以使用二元组形式：
+    // [(url, config) => ({ url, options: config }), (error) => Promise.reject(error)],
+  ],
+};

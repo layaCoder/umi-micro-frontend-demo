@@ -15,7 +15,7 @@ const routes_2 = [
 
 export default {
   //
-  'GET /mock/router/getRoutesList': (reg: any, res: any) => {
+  'GET /router/getRoutesList': (reg: any, res: any) => {
     console.log('getRoutesList', reg.query.id);
     const data = route;
     res.json({

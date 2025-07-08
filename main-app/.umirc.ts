@@ -1,6 +1,9 @@
 import { defineConfig } from '@umijs/max';
 
 export default defineConfig({
+  define: {
+    'process.env': process.env,
+  },
   antd: {},
   access: {},
   model: {},

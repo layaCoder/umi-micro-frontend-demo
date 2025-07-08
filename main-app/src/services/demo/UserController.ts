@@ -104,7 +104,7 @@ export async function getRoutesList(
   },
   options?: { [key: string]: any },
 ): Promise<any[]> {
-  return request<any[]>('/mock/router/getRoutesList', {
+  return request<any[]>('/router/getRoutesList', {
     method: 'GET',
     params,
     ...(options || {}),
